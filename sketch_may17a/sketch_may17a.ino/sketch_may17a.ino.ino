@@ -1,0 +1,26 @@
+#include <SoftwareSerial.h>
+SoftwareSerial mySerial(3,2);
+byte cmdOn[] = {0x7E, 0x80, 0x00, 0x01, 0x00, 0x00, 0x80, 0xAA, 0x00, 0x01, 0x01, 0x00, 0xDE, 0x62, 0x7E  };
+byte cmdOff[] = {0x7E, 0x80, 0x00, 0x01, 0x00, 0x00, 0x81, 0xAA, 0x00, 0x01, 0x01, 0x8A, 0xAB, 0x7E   };
+int len = 15;
+//01 CE 43 7E  
+
+void setup() {
+  mySerial.begin (19200);
+  Serial.begin(19200);
+  Serial.write(cmdOff, sizeof(cmdOff));
+  delay(1000);
+  
+}
+
+ 
+void loop() {
+  for (int i = 0; i < sizeof(cmdOn); i++){
+    Serial.write(cmdOn[i]);
+  }
+  delay(10000);
+}
+
+//11
+
+
